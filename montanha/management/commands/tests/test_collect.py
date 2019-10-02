@@ -29,7 +29,7 @@ from montanha.tests.fixtures import (
 
 class CollectCommandsTestCase(TestCase):
 
-    def _create_instituiton(self, siglum):
+    def _create_institution(self, siglum):
         institution = InstitutionFactory.create(name=siglum, siglum=siglum)
         date_start = datetime.now()
         date_end = date_start + timedelta(days=365 * 4)
@@ -37,17 +37,17 @@ class CollectCommandsTestCase(TestCase):
             date_start=date_start, date_end=date_end, institution=institution
         )
 
-    def test_command_collect_without_instituiton(self):
+    def test_command_collect_without_institution(self):
         with self.assertRaises(CommandError):
             call_command('collect')
 
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.almg.ALMG')
-    def test_with_instituiton_almg(
+    def test_with_institution_almg(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('ALMG')
+        self._create_institution('ALMG')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
@@ -64,10 +64,10 @@ class CollectCommandsTestCase(TestCase):
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.algo.ALGO')
-    def test_with_instituiton_algo(
+    def test_with_institution_algo(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('ALGO')
+        self._create_institution('ALGO')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
@@ -83,10 +83,10 @@ class CollectCommandsTestCase(TestCase):
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.senado.Senado')
-    def test_with_instituiton_senado(
+    def test_with_institution_senado(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('SENADO')
+        self._create_institution('SENADO')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
@@ -101,10 +101,10 @@ class CollectCommandsTestCase(TestCase):
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.cmbh.CMBH')
-    def test_with_instituiton_cmbh(
+    def test_with_institution_cmbh(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('CMBH')
+        self._create_institution('CMBH')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
@@ -120,10 +120,10 @@ class CollectCommandsTestCase(TestCase):
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.cmsp.CMSP')
-    def test_with_instituiton_cmsp(
+    def test_with_institution_cmsp(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('CMSP')
+        self._create_institution('CMSP')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
@@ -138,10 +138,10 @@ class CollectCommandsTestCase(TestCase):
     @patch('montanha.management.commands.collect.Command.collection_runs')
     @patch('montanha.management.commands.collect.call_command')
     @patch('montanha.management.commands.collectors.cdep.CamaraDosDeputados')
-    def test_with_instituiton_cdep(
+    def test_with_institution_cdep(
             self, mock_institution, mock_call_command, collection_runs_mock):
 
-        self._create_instituiton('CamaraDosDeputados')
+        self._create_institution('CamaraDosDeputados')
 
         collection_run = CollectionRunFactory.create()
         collection_runs_mock.__iter__.return_value = [collection_run]
